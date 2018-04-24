@@ -1,14 +1,17 @@
 #include "disassembler.h"
 
-disassembler::disassembler() {
+Disassembler::Disassembler() {
 }
 
-void disassembler::disassemble(unsigned char opcode) {
+void Disassembler::disassemble(std::pair<std::uint_least8_t, std::uint_least8_t> opcode_d) {
+
+	std::uint_least8_t opcode = opcode_d.first;
+	std::uint_least8_t buffer_address = opcode_d.second;
     
     switch(opcode) {
         
         // ADC - Add With Carry
-        case 0x69: std::cout << "ADC imm" << std::endl; break;
+        case 0x69: std::cout << "ADC imm - " << unsigned(buffer_address) << std::endl; break;
         case 0x65: std::cout << "ADC zp" << std::endl; break;
         case 0x75: std::cout << "ADC zp, X" << std::endl; break;
         case 0x6d: std::cout << "ADC abs" << std::endl; break;
@@ -56,7 +59,7 @@ void disassembler::disassemble(unsigned char opcode) {
         case 0x2c: std::cout << "BIT abs" << std::endl; break;
         
         // BRK - Force Interrupt
-        case 0x00: std::cout << "BRK" << std::endl; break;
+        case 0x00: std::cout << "BRK - " << unsigned(buffer_address) << std::endl; break;
         
         // CLC - Clear Carry Flag
         case 0x18: std::cout << "CLC" << std::endl; break;
@@ -122,7 +125,9 @@ void disassembler::disassemble(unsigned char opcode) {
         case 0x20: std::cout << "JSR abs" << std::endl; break;
         
         // LDA - Load Accumulator
-        case 0xa9: std::cout << "LDA imm" << std::endl; break;
+        case 0xa9: 
+			std::cout << "LDA imm" << std::endl;
+			break;
         case 0xa5: std::cout << "LDA zp" << std::endl; break;
         case 0xb5: std::cout << "LDA zp, X" << std::endl; break;
         case 0xad: std::cout << "LDA abs" << std::endl; break;

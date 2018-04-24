@@ -1,5 +1,5 @@
 #include "cpu.h"
 
-cpu::cpu() {
+Cpu::Cpu() {
 }
 

@@ -1,5 +1,5 @@
-#include "disassembler.h"
 #include "romreader.h"
+#include "cpu.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -10,19 +10,14 @@
 
 int main() {
     
-    disassembler disassembler_;
-    romreader romreader_;
+	Cpu cpu;
+    Romreader romreader;
 
-    romreader_.read_file("smb.nes");
-	disassembler_.disassemble(romreader_.return_opcode(0));
-	disassembler_.disassemble(romreader_.return_opcode(1));
-	disassembler_.disassemble(romreader_.return_opcode(2));
-	disassembler_.disassemble(romreader_.return_opcode(3));
-	disassembler_.disassemble(romreader_.return_opcode(4));
-	disassembler_.disassemble(romreader_.return_opcode(5));
-	disassembler_.disassemble(romreader_.return_opcode(6));
-	disassembler_.disassemble(romreader_.return_opcode(7));
-    disassembler_.disassemble(romreader_.return_opcode(8));
+    romreader.read_file("smb.nes");
+	for (int i = 0; i < 100; i++) {
+		std::pair<std::uint_least8_t, std::uint_least8_t> opcode = romreader.return_opcode(i);
+		cpu.disassembler.disassemble(opcode);
+	}
 
 	std::getchar();
     

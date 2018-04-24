@@ -5,11 +5,11 @@
 //		Constructor / Desctructor
 // =================================
 
-romreader::romreader() {
+Romreader::Romreader() {
     byte_reader = new char[1];
 }
 
-romreader::~romreader() {
+Romreader::~Romreader() {
     delete byte_reader;
 }
 
@@ -18,7 +18,7 @@ romreader::~romreader() {
 // =================================
 
 // read_file is the main 
-void romreader::read_file(std::string file_name) {
+void Romreader::read_file(std::string file_name) {
 
 	// Open the rom file, return the file size 
 	const unsigned int file_size = open_rom_file(file_name);
@@ -32,9 +32,10 @@ void romreader::read_file(std::string file_name) {
 	const int meta_data_size = 5;
 	const int meta_data_end = meta_data_start + meta_data_size;
 
-	for (int i = meta_data_start; i <= meta_data_end; i++)
+	for (int i = meta_data_start; i <= meta_data_end; i++) {
 		rom_meta_data.push_back(rom_data[i]);
-
+	}
+		
 	// meta data mapping:
 	// [0] read prg rom size in 16kb blocks
 	// [1] read chr rom size in 8kb blocks
@@ -46,8 +47,8 @@ void romreader::read_file(std::string file_name) {
 }
 
 //std::uint_least8_t
-std::uint_least8_t romreader::return_opcode(std::uint_least8_t buffer_address) {
-	return rom_data[buffer_address];
+std::pair<std::uint_least8_t, std::uint_least8_t> Romreader::return_opcode(std::uint_least8_t buffer_address) {
+	return std::make_pair(rom_data[buffer_address], buffer_address);
 }
 
 // =================================
@@ -55,7 +56,7 @@ std::uint_least8_t romreader::return_opcode(std::uint_least8_t buffer_address) {
 // =================================
 
 // Validation if opened file is a NES file
-bool romreader::validate_ines(char * nes_brand) {
+bool Romreader::validate_ines(char * nes_brand) {
     
     // Check the first 4 bytes which are const for all .nes files
     bool validity = 1;
@@ -68,7 +69,7 @@ bool romreader::validate_ines(char * nes_brand) {
 }
 
 // Store new rom file in current_file, validate if it's a valid NES
-int romreader::open_rom_file(std::string file_name) {
+int Romreader::open_rom_file(std::string file_name) {
     
     // File opening
     current_file.clear();

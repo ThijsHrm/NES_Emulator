@@ -2,12 +2,16 @@
 #define CPU_H
 
 #include <cstdint>
+#include "ram.h"
+#include "disassembler.h"
 
-class cpu {
+class Cpu {
 public:
 
 	// class constructor
-    cpu();
+    Cpu();
+	Ram ram;
+	Disassembler disassembler;
 
 private:
 

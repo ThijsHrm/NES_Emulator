@@ -8,16 +8,16 @@
 #include <vector>
 #include <bitset>
 
-class romreader {
+class Romreader {
 public:
 
 	// class constructor and destructor
-    romreader();
-    ~romreader();
+    Romreader();
+    ~Romreader();
 
 	// public methods
     void read_file(std::string);
-    std::uint_least8_t return_opcode(std::uint_least8_t);
+	std::pair<std::uint_least8_t, std::uint_least8_t> return_opcode(std::uint_least8_t);
 
 private:
 

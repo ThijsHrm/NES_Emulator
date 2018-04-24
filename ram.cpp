@@ -1,10 +1,10 @@
 #include "ram.h"
 
-ram::ram()
+Ram::Ram()
 {
 
 }
 
-ram::~ram()
+Ram::~Ram()
 {
 }

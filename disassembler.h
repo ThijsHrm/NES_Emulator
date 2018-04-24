@@ -5,14 +5,14 @@
 #include <fstream>
 #include <string>
 
-class disassembler {
+class Disassembler {
 public:
 
 	// class constructor
-    disassembler();
+    Disassembler();
 
 	// public methods
-    void disassemble(unsigned char opcode);
+    void disassemble(std::pair<std::uint_least8_t, std::uint_least8_t> opcode);
 
 private:
 
