@@ -11,7 +11,9 @@ public:
 	// class constructor
     Cpu();
 	Ram ram;
-	Disassembler disassembler;
+
+	// public methods
+	void disassemble(std::pair<std::uint_least8_t, std::uint_least8_t> opcode);
 
 private:
 

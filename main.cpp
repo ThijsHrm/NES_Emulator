@@ -10,13 +10,13 @@
 
 int main() {
     
-	Cpu cpu;
-    Romreader romreader;
+	Cpu cpu_;
+    Romreader romreader_;
 
-    romreader.read_file("smb.nes");
+    romreader_.read_file("smb.nes");
 	for (int i = 0; i < 100; i++) {
-		std::pair<std::uint_least8_t, std::uint_least8_t> opcode = romreader.return_opcode(i);
-		cpu.disassembler.disassemble(opcode);
+		std::pair<std::uint_least8_t, std::uint_least8_t> opcode = romreader_.return_opcode(i);
+	    cpu_.disassemble(opcode);
 	}
 
 	std::getchar();

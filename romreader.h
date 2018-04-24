@@ -8,6 +8,12 @@
 #include <vector>
 #include <bitset>
 
+// Type specification for returning rom data
+typedef std::pair<std::vector <std::uint_least8_t>, std::vector <std::uint_least8_t>> romdata;
+
+// Type specification for returning opcodes
+typedef std::pair<std::uint_least8_t, std::uint_least8_t> opcode;
+
 class Romreader {
 public:
 
@@ -16,8 +22,8 @@ public:
     ~Romreader();
 
 	// public methods
-    void read_file(std::string);
-	std::pair<std::uint_least8_t, std::uint_least8_t> return_opcode(std::uint_least8_t);
+	romdata read_file(std::string);
+	opcode return_opcode(std::uint_least16_t);
 
 private:
 

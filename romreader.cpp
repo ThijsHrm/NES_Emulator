@@ -18,7 +18,7 @@ Romreader::~Romreader() {
 // =================================
 
 // read_file is the main 
-void Romreader::read_file(std::string file_name) {
+romdata Romreader::read_file(std::string file_name) {
 
 	// Open the rom file, return the file size 
 	const unsigned int file_size = open_rom_file(file_name);
@@ -43,12 +43,15 @@ void Romreader::read_file(std::string file_name) {
 	// [3] read flags 7
 	// [4] read prg ram size in 8kb blocks
 	// [5] read flags 9
-
+    
+    romdata _romdata = std::make_pair(rom_data, rom_meta_data);
+    return _romdata;
 }
 
-//std::uint_least8_t
-std::pair<std::uint_least8_t, std::uint_least8_t> Romreader::return_opcode(std::uint_least8_t buffer_address) {
-	return std::make_pair(rom_data[buffer_address], buffer_address);
+// returns a pair(opcode, buffer_address) for a specified address
+opcode Romreader::return_opcode(std::uint_least16_t buffer_address) {
+	opcode _opcode = std::make_pair(rom_data[buffer_address], buffer_address);
+	return _opcode;
 }
 
 // =================================
