@@ -10,6 +10,7 @@ Makefile
 *.lo
 *.o
 *.obj
+*.json
 
 # Precompiled Headers
 *.gch
