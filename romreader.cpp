@@ -1,5 +1,4 @@
 #include "romreader.h"
-#include "disassembler.h"
 
 // =================================
 //		Constructor / Desctructor
@@ -60,39 +59,40 @@ opcode Romreader::return_opcode(std::uint_least16_t buffer_address) {
 
 // Validation if opened file is a NES file
 bool Romreader::validate_ines(char * nes_brand) {
-    
-    // Check the first 4 bytes which are const for all .nes files
-    bool validity = 1;
-    if (nes_brand[0] != 0x4e) validity = 0;
-    if (nes_brand[1] != 0x45) validity = 0;
-    if (nes_brand[2] != 0x53) validity = 0;
-    if (nes_brand[3] != 0x1a) validity = 0;
-    return validity;
-    
+
+	// Check the first 4 bytes which are const for all .nes files
+	bool validity = 1;
+	if (nes_brand[0] != 0x4e) validity = 0;
+	if (nes_brand[1] != 0x45) validity = 0;
+	if (nes_brand[2] != 0x53) validity = 0;
+	if (nes_brand[3] != 0x1a) validity = 0;
+	return validity;
+
 }
 
 // Store new rom file in current_file, validate if it's a valid NES
 int Romreader::open_rom_file(std::string file_name) {
+
+	// File opening
+	current_file.clear();
+	current_file.open(file_name, std::ios::binary | std::ios::in);
+	if (current_file.fail()) {
+		std::cerr << "Opening file failed" << std::endl;
+	}
     
-    // File opening
-    current_file.clear();
-    current_file.open(file_name, std::ios::binary | std::ios::in);
-    if (current_file.fail()) {
-        std::cerr << "Opening file failed" << std::endl;
-    }
-    
-    // Get file size
-    current_file.seekg(0, std::ios::end);
-    const unsigned int file_size = current_file.tellg();
-    
-    // Verify if NES rom ...
-    current_file.seekg(0, std::ios::beg);
-    char * nes_brand = new char [4]; 
-    current_file.read(nes_brand, 4);
-    if (!validate_ines(nes_brand)) {
-        std::cerr << "Specified input file is not a NES rom" << std::endl;
-    }
-    delete nes_brand;
-    
-    return file_size;
+	// Get file size
+	current_file.seekg(0, std::ios::end);
+	const unsigned int file_size = current_file.tellg();
+	
+	// Verify if NES rom ...
+	current_file.seekg(0, std::ios::beg);
+	char * nes_brand = new char [4]; 
+	current_file.read(nes_brand, 4);
+	if (!validate_ines(nes_brand)) {
+		std::cerr << "Specified input file is not a NES rom" << std::endl;
+	}
+	delete nes_brand;
+	
+	return file_size;
+
 }

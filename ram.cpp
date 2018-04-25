@@ -2,7 +2,6 @@
 
 Ram::Ram()
 {
-
 }
 
 Ram::~Ram()

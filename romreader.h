@@ -18,8 +18,8 @@ class Romreader {
 public:
 
 	// class constructor and destructor
-    Romreader();
-    ~Romreader();
+	Romreader();
+	~Romreader();
 
 	// public methods
 	romdata read_file(std::string);
@@ -28,8 +28,8 @@ public:
 private:
 
 	// for opening rom files
-    std::ifstream current_file;
-    bool validate_ines(char *);
+	std::ifstream current_file;
+	bool validate_ines(char *);
 
 	// for extracting data from rom files
 	std::vector <std::uint_least8_t> rom_data;
@@ -37,7 +37,7 @@ private:
 	char * byte_reader;
 
 	// private methods
-    int open_rom_file(std::string file_name);
+	int open_rom_file(std::string file_name);
     
 };
 
