@@ -5,11 +5,11 @@
 // =================================
 
 Romreader::Romreader() {
-    byte_reader = new char[1];
+	byte_reader = new char[1];
 }
 
 Romreader::~Romreader() {
-    delete byte_reader;
+	delete byte_reader;
 }
 
 // =================================
@@ -42,9 +42,9 @@ romdata Romreader::read_file(std::string file_name) {
 	// [3] read flags 7
 	// [4] read prg ram size in 8kb blocks
 	// [5] read flags 9
-    
-    romdata _romdata = std::make_pair(rom_data, rom_meta_data);
-    return _romdata;
+	
+	romdata _romdata = std::make_pair(rom_data, rom_meta_data);
+	return _romdata;
 }
 
 // returns a pair(opcode, buffer_address) for a specified address
